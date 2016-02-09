@@ -1,8 +1,8 @@
 from math import*
 from random import*
 #estaOrdenado
-def esta_ordenado(a):
-	k = all(a[i]<=a[i+1] for i in range(len(a)-1))
+def esta_ordenado(a,p,r):
+	k = all(a[i]<=a[i+1] for i in range(p,r))
 	if k: print("Esta ordenado")
 	else: print("Jodete")
 ##########################################################################################################################################
@@ -140,6 +140,5 @@ def quicksort_3_way_partitioning(A,l,r):
 ############################################################################################################################################
 
 a = [i for i in range(40000)]
-for i in range(0,40000,100):a[i] = 100
 quicksort_3_way_partitioning(a,0,len(a)-1)
-esta_ordenado(a)
+esta_ordenado(a,0,len(a)-1)
