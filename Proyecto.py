@@ -105,11 +105,33 @@ def introsort_loop(A,p,r,limit):
 
 #3-way-Partitionig Quicksort
 def quicksort_3_way_partitioning(A,l,r):
-	i,j,p,q,r = 
-
-
-
-
-a = [i for i in range(400000)]
-insertionsort(a,0,len(a)-1)
+	i,j,p,q,v = l-1,r,l-1,r,A[r]
+	if r>p:
+		while True:
+			while True:
+				i+=1
+				if A[i]>=v: break
+			while True:
+				j-=1
+				if A[j]<=v or j==l: break
+			if i>=j: break
+			A[i],A[j] = A[j],A[i]
+			if a[i] == v:
+				p+=1
+				A[p],A[i] = A[i],A[p]
+			if v == A[j]:
+				q-=1
+				A[j],A[q] = A[q],A[j]
+		A[i],A[r] = A[r],A[i]
+		for k in range(l,p):
+			A[k],A[j] = A[j],A[k]
+			j+=1
+		for k in range(r-1,q,-1):
+			A[k],A[i] = A[i],A[k]
+			i+=1
+		quicksort_3_way_partitioning(A,l,j)
+		quicksort_3_way_partitioning(A,i,r)
+############################################################################################################################################
+a = [10-i for i in range(10)]
+quicksort_3_way_partitioning(a,0,len(a)-1)
 esta_ordenado(a)
