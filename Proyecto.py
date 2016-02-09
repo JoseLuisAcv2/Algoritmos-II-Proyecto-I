@@ -74,7 +74,6 @@ def median_of_three(a,b,c):
 #Median-of-Three Quicksort
 def median_of_threeQuicksort(A,p,r):
 	quicksort_loop(A,p,r)
-	insertionsort(A,p,r)
 def quicksort_loop(A,p,r):
 	while r-p+1>15:
 		m = Partition(A,p,r,median_of_three(A[p],A[r],A[(p+r)//2]))
@@ -84,16 +83,17 @@ def quicksort_loop(A,p,r):
 		else:
 			quicksort_loop(A,p,m)
 			p = m+1
+	#print("Comenzando Insertion Sort...")
+	insertionsort(A,p,r)
 ############################################################################################################################################
 
 #Introsort
 def introsort(A,p,r):
 	introsort_loop(A,p,r,2*int(log(len(a),2)))
-	insertionsort(A,p,r)
 def introsort_loop(A,p,r,limit):
 	while r-p+1>15:
 		if limit == 0:
-			print("comenzando heapsort para",p,"y",r)
+			#print("comenzando heapsort para",p,"y",r)
 			heapsort(A,p,r)
 			return 
 		else:
@@ -101,6 +101,8 @@ def introsort_loop(A,p,r,limit):
 			m = Partition(A,p,r,median_of_three(A[p],A[r],A[(p+r)//2]))
 			introsort_loop(A,m,r,limit)
 			r = m
+	#print("Comenzando Insertion Sort...")
+	insertionsort(A,p,r)
 ############################################################################################################################################
 
 #3-way-Partitionig Quicksort
@@ -132,6 +134,6 @@ def quicksort_3_way_partitioning(A,l,r):
 		quicksort_3_way_partitioning(A,l,j)
 		quicksort_3_way_partitioning(A,i,r)
 ############################################################################################################################################
-a = [10-i for i in range(10)]
-quicksort_3_way_partitioning(a,0,len(a)-1)
+a = [randint(0,10) for i in range(40000)]
+median_of_threeQuicksort(a,0,len(a)-1)
 esta_ordenado(a)
