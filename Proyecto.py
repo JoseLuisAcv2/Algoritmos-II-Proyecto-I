@@ -93,7 +93,7 @@ def introsort(A,p,r):
 def introsort_loop(A,p,r,limit):
 	while r-p+1>15:
 		if limit == 0:
-			#print("comenzando heapsort para",p,"y",r)
+			print("comenzando heapsort para",p,"y",r)
 			heapsort(A,p,r)
 			return 
 		else:
@@ -139,6 +139,6 @@ def quicksort_3_way_partitioning(A,l,r):
 			quicksort_3_way_partitioning(A,i,r)
 ############################################################################################################################################
 
-a = [i for i in range(40000)]
-quicksort_3_way_partitioning(a,0,len(a)-1)
+a = [randint(0,10) for i in range(40000)]
+introsort(a,0,len(a)-1)
 esta_ordenado(a,0,len(a)-1)
