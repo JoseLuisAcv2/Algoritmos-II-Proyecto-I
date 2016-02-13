@@ -1,5 +1,6 @@
 from math import*
 from random import*
+from sys import*
 #estaOrdenado
 def esta_ordenado(a,p,r):
 	k = all(a[i]<=a[i+1] for i in range(p,r))
@@ -107,8 +108,11 @@ def introsort_loop(A,p,r,limit):
 
 #3-way-Partitionig Quicksort
 def quicksort_3_way_partitioning(A,l,r):
-	if r-l+1<=15:insertionsort(A,l,r)
+	if r-l+1<=15:
+		insertionsort(A,l,r)
 	else:
+		u = randint(l,r)
+		A[u],A[r] = A[r],A[u]
 		i,j,p,q,v = l-1,r,l-1,r,A[r]
 		if r>l:
 			while True:
@@ -139,6 +143,47 @@ def quicksort_3_way_partitioning(A,l,r):
 			quicksort_3_way_partitioning(A,i,r)
 ############################################################################################################################################
 
-a = [randint(0,10) for i in range(40000)]
-introsort(a,0,len(a)-1)
+
+#Quicksort 2 pivotes
+def quicksort_2p(A,left,right):
+	if right-left+1<=15:
+		insertionsort(A,left,right)
+	else:
+		x,y = randint(left,right),randint(left,right)
+		A[left],A[right],A[x],A[y] = A[x],A[y],A[left],A[right]
+		if A[left]>A[right]:
+			p,q = A[right],A[left]
+		else:
+			q,p = A[right],A[left]
+		l,g = left+1,right-1
+		k = l
+		while k<=g:
+			if A[k] < p:
+				A[k],A[l] = A[l],A[k]
+				l+=1
+			else:
+				if A[k]>=q:
+					while A[g]>q and k<g:
+						g-=1
+					if A[g]>=p:
+						A[k],A[g] = A[g],A[k]
+					else:
+						A[k],A[g] = A[g],A[k]
+						A[k],A[l] = A[l],A[k]
+						l+=1
+					g-=1
+			k+=1
+		l-=1
+		g+=1
+		A[left] = A[l]
+		A[l] = p
+		A[right] = A[g]
+		A[g] = q
+		quicksort_2p(A,left,l-1)
+		quicksort_2p(A,l+1,g-1)
+		quicksort_2p(A,g+1,right)			
+
+
+a = [i for i in range(100000)]
+quicksort_2p(a,0,len(a)-1)
 esta_ordenado(a,0,len(a)-1)
