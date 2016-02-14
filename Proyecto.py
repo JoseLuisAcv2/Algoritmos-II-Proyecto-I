@@ -4,8 +4,10 @@ from sys import*
 #estaOrdenado
 def esta_ordenado(a,p,r):
 	k = all(a[i]<=a[i+1] for i in range(p,r))
-	if k: print("Esta ordenado")
-	else: print("Jodete")
+	if k: 
+		print("Esta ordenado")
+	else: 
+		print("Jodete")
 ##########################################################################################################################################
 
 #Insertion sort
@@ -75,6 +77,7 @@ def median_of_three(a,b,c):
 #Median-of-Three Quicksort
 def median_of_threeQuicksort(A,p,r):
 	quicksort_loop(A,p,r)
+	insertionsort(A,p,r)
 def quicksort_loop(A,p,r):
 	while r-p+1>15:
 		m = Partition(A,p,r,median_of_three(A[p],A[r],A[(p+r)//2]))
@@ -84,8 +87,6 @@ def quicksort_loop(A,p,r):
 		else:
 			quicksort_loop(A,p,m)
 			p = m+1
-	#print("Comenzando Insertion Sort...")
-	insertionsort(A,p,r)
 ############################################################################################################################################
 
 #Introsort
@@ -94,7 +95,7 @@ def introsort(A,p,r):
 def introsort_loop(A,p,r,limit):
 	while r-p+1>15:
 		if limit == 0:
-			print("comenzando heapsort para",p,"y",r)
+			#print("comenzando heapsort para",p,"y",r)
 			heapsort(A,p,r)
 			return 
 		else:
@@ -184,6 +185,6 @@ def quicksort_2p(A,left,right):
 		quicksort_2p(A,g+1,right)			
 
 
-a = [i for i in range(100000)]
-quicksort_2p(a,0,len(a)-1)
+a = [randint(0,1) for i in range(10000)]
+median_of_threeQuicksort(a,0,len(a)-1)
 esta_ordenado(a,0,len(a)-1)
