@@ -1,30 +1,45 @@
+""" Proyecto I Algoritmos II
+	Integrantes: Jose Luis Acevedo #13-10006
+				 Pablo Betancourt  #13-10147
+
+									Libreria de Algoritmos de ordenamiento
+"""
+
 from math import*
 from random import*
 from sys import*
-#estaOrdenado
+
+""" Nombre: estaOrdenado
+	Descripcion: Funcion que verifica si un arreglo A esta ordenado en el intervalo [p,r]
+"""
 def esta_ordenado(a,p,r):
-	k = all(a[i]<=a[i+1] for i in range(p,r))
-	if k: 
+	if all(a[i]<=a[i+1] for i in range(p,r)):
 		print("Esta ordenado")
 	else: 
-		print("Jodete")
+		print("No esta ordenado")
+
 ##########################################################################################################################################
 
-#Insertion sort
+"""	Nombre: insertionsort
+	Descripcion: Algoritmo de ordenamiento O(N²)
+"""
 def insertionsort(A,p,r):
 	for i in range(p+1,r+1):
 		key = A[i]
 		j = i-1
 		while j>=p and A[j] > key:
 			A[j+1] = A[j]
-			j-=1
+			j -= 1
 		A[j+1] = key
+
 ##########################################################################################################################################
 
 #Heapsort
-def maxHeapify(A, i, heapSize,p):
-	left  = 2*i + 1-p
-	right = 2*i + 2-p
+def maxHeapify(A, i, heapSize, p):
+
+	left  = 2*i + 1 - p
+	right = 2*i + 2 - p
+
 	if left-p < heapSize and A[left] > A[i]:
 		largest = left
 	else:
@@ -35,43 +50,53 @@ def maxHeapify(A, i, heapSize,p):
 
 	if largest != i:
 		A[largest], A[i] = A[i], A[largest]
-		maxHeapify(A, largest, heapSize,p)
-def buildMaxHeap(A, heapSize,p,r):
-	for i in range(r-heapSize // 2, p-1, -1):
-		maxHeapify(A, i, heapSize,p)
+		maxHeapify(A, largest, heapSize, p)
+
+def buildMaxHeap(A, heapSize, p, r):
+	for i in range(r - heapSize//2, p-1, -1):
+		maxHeapify(A, i, heapSize, p)
+
 def heapsort(A,p,r):
 
-	heapSize = r-p+1
-	buildMaxHeap(A, heapSize,p,r)
+	heapSize = r - p + 1
+	buildMaxHeap(A, heapSize, p, r)
 
 	for i in range(p,r):
-		A[p], A[p+heapSize -1] = A[p+heapSize - 1], A[p]
+		A[p], A[p + heapSize -1] = A[p + heapSize - 1], A[p]
 		heapSize -= 1
-		maxHeapify(A, p, heapSize,p)
+		maxHeapify(A, p, heapSize, p)
+
 ##########################################################################################################################################
 
 #Hoare Partition
 def Partition(A,p,r,x):
-	i = p-1
-	j = r+1
+	i = p
+	j = r
 	while True:
 		while True:
 			j-=1
-			if A[j]<=x: break
+			if A[j]<=x:
+				break
 		while True:
 			i+=1
-			if A[i]>=x: break
+			if A[i]>=x:
+				break
 		if i < j:
 			A[i],A[j] = A[j],A[i]
 		else:
-			return j
+			return i
+
 ##########################################################################################################################################
  
  #Median of 3
 def median_of_three(a,b,c):
-	B = [a,b,c]
-	B.sort()
-	return B[1]
+	if a < b and b < c:
+		return b
+	elif b < a and a < c:
+		return a
+	else:
+		return c
+
 ##########################################################################################################################################
 
 #Median-of-Three Quicksort
@@ -91,11 +116,11 @@ def quicksort_loop(A,p,r):
 
 #Introsort
 def introsort(A,p,r):
-	introsort_loop(A,p,r,2*int(log(len(a),2)))
+	introsort_loop(A,p,r,2*int(log(len(A),2)))
+	insertionsort(A,p,r)
 def introsort_loop(A,p,r,limit):
 	while r-p+1>15:
 		if limit == 0:
-			#print("comenzando heapsort para",p,"y",r)
 			heapsort(A,p,r)
 			return 
 		else:
@@ -103,12 +128,11 @@ def introsort_loop(A,p,r,limit):
 			m = Partition(A,p,r,median_of_three(A[p],A[r],A[(p+r)//2]))
 			introsort_loop(A,m,r,limit)
 			r = m
-	#print("Comenzando Insertion Sort...")
-	insertionsort(A,p,r)
 ############################################################################################################################################
 
 #3-way-Partitionig Quicksort
 def quicksort_3_way_partitioning(A,l,r):
+	#setrecursionlimit(len(A) + 100000)
 	if r-l+1<=15:
 		insertionsort(A,l,r)
 	else:
@@ -122,7 +146,7 @@ def quicksort_3_way_partitioning(A,l,r):
 					if A[i]>=v: break
 				while True:
 					j-=1
-					if A[j]<=v or j==l: break
+					if A[j]<=v: break
 				if i>=j: break
 				A[i],A[j] = A[j],A[i]
 				if A[i] == v:
@@ -147,6 +171,7 @@ def quicksort_3_way_partitioning(A,l,r):
 
 #Quicksort 2 pivotes
 def quicksort_2p(A,left,right):
+	#setrecursionlimit(len(A)+100000)
 	if right-left+1<=15:
 		insertionsort(A,left,right)
 	else:
@@ -183,8 +208,3 @@ def quicksort_2p(A,left,right):
 		quicksort_2p(A,left,l-1)
 		quicksort_2p(A,l+1,g-1)
 		quicksort_2p(A,g+1,right)			
-
-
-a = [randint(0,1) for i in range(10000)]
-median_of_threeQuicksort(a,0,len(a)-1)
-esta_ordenado(a,0,len(a)-1)
