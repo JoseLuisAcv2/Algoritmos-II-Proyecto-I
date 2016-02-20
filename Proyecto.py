@@ -130,12 +130,12 @@ def introsort_loop(A,p,r,limit):
 
 #3-way-Partitionig Quicksort
 def quicksort_3_way_partitioning(A,l,r):
-	#setrecursionlimit(len(A) + 100000)
+	setrecursionlimit(len(A) + 100000000)
 	if r-l+1<=15:
 		insertionsort(A,l,r)
 	else:
-		u = randint(l,r)
-		A[u],A[r] = A[r],A[u]
+		#u = randint(l,r)
+		#A[u],A[r] = A[r],A[u]
 		i,j,p,q,v = l-1,r,l-1,r,A[r]
 		if r>l:
 			while True:
@@ -169,12 +169,12 @@ def quicksort_3_way_partitioning(A,l,r):
 
 #Quicksort 2 pivotes
 def quicksort_2p(A,left,right):
-	#setrecursionlimit(len(A)+100000)
+	setrecursionlimit(len(A)+100000000)
 	if right-left+1<=15:
 		insertionsort(A,left,right)
 	else:
-		x,y = randint(left,right),randint(left,right)
-		A[left],A[right],A[x],A[y] = A[x],A[y],A[left],A[right]
+		#x,y = randint(left,right),randint(left,right)
+		#A[left],A[right],A[x],A[y] = A[x],A[y],A[left],A[right]
 		if A[left]>A[right]:
 			p,q = A[right],A[left]
 		else:

@@ -1,4 +1,5 @@
 from Proyecto import*
+from threading import*
 def obtenerArreglo(m,n):
 	if m == 1:
 		a = puntoFlotante(n)
@@ -42,8 +43,8 @@ def casiOrdenado2(n):
 		j = randint(0,n-5)
 		A[j],A[j+4] = A[j+4],A[j]
 	return A
-def hola(n):
-	arr = obtenerArreglo(k[1],k[0])
+def hola(n,m):
+	arr = obtenerArreglo(m,n)
 	print("Heapsort")
 	a = arr
 	heapsort(a,0,len(a)-1)
@@ -65,7 +66,9 @@ def hola(n):
 	quicksort_2p(a,0,len(a)-1)
 	esta_ordenado(a,0,len(a)-1)
 k = map(int,argv[1:])
+stack_size(67108864)
+tr = Thread(target=hola,args=(k[0],k[1]))
 for i  in range(k[2]):
 	print "---"
-	hola(k[0])
+	tr.start()
 
