@@ -1,5 +1,6 @@
 from Proyecto import*
 from threading import*
+from time import*
 def obtenerArreglo(m,n):
 	if m == 1:
 		a = puntoFlotante(n)
@@ -45,26 +46,45 @@ def casiOrdenado2(n):
 	return A
 def hola(n,m):
 	arr = obtenerArreglo(m,n)
-	print("Heapsort")
+	print("Comenzando Heapsort...")
 	a = arr
+	start_time = time()
 	heapsort(a,0,len(a)-1)
+	end_time = time() - start_time
 	esta_ordenado(a,0,len(a)-1)
+	print("Tiempo de heapsort:",end_time)
+	print
 	print("Median Of Three Quicksort")
 	a = arr
+	start_time = time()
 	median_of_threeQuicksort(a,0,len(a)-1)
+	end_time = time() - start_time
 	esta_ordenado(a,0,len(a)-1)
+	print("Tiempo de Median Of Three Quicksort:",end_time)
+	print
 	print("Instrosort")
 	a = arr
+	start_time = time()
 	introsort(a,0,len(a)-1)
+	end_time = time() - start_time
 	esta_ordenado(a,0,len(a)-1)
+	print("Tiempo de Introsort:",end_time)
+	print
 	print("3-way Partitioning Quicksort")
 	a = arr
+	start_time = time()
 	quicksort_3_way_partitioning(a,0,len(a)-1)
+	end_time = time() - start_time
 	esta_ordenado(a,0,len(a)-1)
+	print("Tiempo de 3-way Partitioning Quicksort:",end_time)
+	print
 	print("Dual Pivot Quicksort")
 	a = arr
+	start_time = time()
 	quicksort_2p(a,0,len(a)-1)
+	end_time = time() - start_time
 	esta_ordenado(a,0,len(a)-1)
+	print("Tiempo de Dual Pivot Quicksort:",end_time)
 k = map(int,argv[1:])
 stack_size(67108864)
 tr = Thread(target=hola,args=(k[0],k[1]))
