@@ -73,16 +73,18 @@ def Partition(A,p,r,x):
 	i = p-1
 	j = r+1
 	while True:
-		j-=1
-		while A[j]>x:
+		while True:
 			j-=1
-		i+=1
-		while A[i]<x:
+			if A[j] <= x:
+				break
+		while True:
 			i+=1
+			if A[i]>=x:
+				break
 		if i < j:
 			A[i],A[j] = A[j],A[i]
 		else:
-			return i
+			return j
 
 ##########################################################################################################################################
  
@@ -205,4 +207,4 @@ def quicksort_2p(A,left,right):
 		A[g] = q
 		quicksort_2p(A,left,l-1)
 		quicksort_2p(A,l+1,g-1)
-		quicksort_2p(A,g+1,right)			
+		quicksort_2p(A,g+1,right)
