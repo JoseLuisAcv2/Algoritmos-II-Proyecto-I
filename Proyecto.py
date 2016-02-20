@@ -21,7 +21,7 @@ def esta_ordenado(a,p,r):
 ##########################################################################################################################################
 
 """	Nombre: insertionsort
-	Descripcion: Algoritmo de ordenamiento O(N²)
+	Descripcion: Algoritmo de ordenamiento O(N^2)
 """
 def insertionsort(A,p,r):
 	for i in range(p+1,r+1):
@@ -70,17 +70,15 @@ def heapsort(A,p,r):
 
 #Hoare Partition
 def Partition(A,p,r,x):
-	i = p
-	j = r
+	i = p-1
+	j = r+1
 	while True:
-		while True:
+		j-=1
+		while A[j]>x:
 			j-=1
-			if A[j]<=x:
-				break
-		while True:
+		i+=1
+		while A[i]<x:
 			i+=1
-			if A[i]>=x:
-				break
 		if i < j:
 			A[i],A[j] = A[j],A[i]
 		else:
