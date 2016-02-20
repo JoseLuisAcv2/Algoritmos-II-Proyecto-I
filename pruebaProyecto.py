@@ -34,17 +34,28 @@ def mitad(n):
 	return A
 def casiOrdenado1(n):
 	A = ordenado(n)
+	B = [False]*n
 	for i in range(16):
-		j = randint(0,n-9)
-		A[j],A[j+8] = A[j+8],A[j]
+		while True:
+			j = randint(0,n-9)
+			if not(B[j]) and not(B[j+8]):
+				A[j],A[j+8] = A[j+8],A[j]
+				B[j],B[j+8] = True,True
+				break
 	return A
 def casiOrdenado2(n):
 	A = ordenado(n)
+	B = [False]*n
 	for i in range(n//4):
-		j = randint(0,n-5)
-		A[j],A[j+4] = A[j+4],A[j]
+		while True:
+			j = randint(0,n-5)
+			if not(B[j]) and not(B[j+4]):
+				A[j],A[j+4] = A[j+4],A[j]
+				B[j],B[j+4] = True,True
+				break
 	return A
 def hola(n,m):
+	print "Obteniendo Arreglo..."
 	arr = obtenerArreglo(m,n)
 	print "Comenzando Heapsort..."
 	a = arr
