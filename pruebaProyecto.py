@@ -1,6 +1,7 @@
 from Proyecto import*
 from threading import*
 from time import*
+J = [[] for i in range(5)]
 def obtenerArreglo(m,n):
 	if m == 1:
 		a = puntoFlotante(n)
@@ -54,7 +55,7 @@ def casiOrdenado2(n):
 				B[j],B[j+4] = True,True
 				break
 	return A
-def hola(n,m):
+def pruebaAlgoritmos(n,m):
 	print "Obteniendo Arreglo..."
 	arr = obtenerArreglo(m,n)
 	print "Comenzando Heapsort..."
@@ -62,46 +63,57 @@ def hola(n,m):
 	start_time = time()
 	heapsort(a,0,len(a)-1)
 	end_time = time() - start_time
+	J[0].append(end_time)
 	esta_ordenado(a,0,len(a)-1)
 	print "Tiempo de heapsort:",end_time
 	print
-	print "Median Of Three Quicksort"
+	print "Comenzando Median Of Three Quicksort..."
 	a = arr
 	start_time = time()
 	median_of_threeQuicksort(a,0,len(a)-1)
 	end_time = time() - start_time
+	J[1].append(end_time)
 	esta_ordenado(a,0,len(a)-1)
 	print "Tiempo de Median Of Three Quicksort:",end_time 
 	print
-	print "Instrosort"
+	print "Comenzando Instrosort..."
 	a = arr
 	start_time = time()
 	introsort(a,0,len(a)-1)
 	end_time = time() - start_time
+	J[2].append(end_time)
 	esta_ordenado(a,0,len(a)-1)
 	print "Tiempo de Introsort:",end_time
 	print
-	print "3-way Partitioning Quicksort"
+	print "Comenzando 3-way Partitioning Quicksort..."
 	a = arr
 	start_time = time()
 	quicksort_3_way_partitioning(a,0,len(a)-1)
 	end_time = time() - start_time
+	J[3].append(end_time)
 	esta_ordenado(a,0,len(a)-1)
 	print "Tiempo de 3-way Partitioning Quicksort:",end_time
 	print
-	print "Dual Pivot Quicksort"
+	print "Comenzando Dual Pivot Quicksort..."
 	a = arr
 	start_time = time()
 	quicksort_2p(a,0,len(a)-1)
 	end_time = time() - start_time
+	J[4].append(end_time)
 	esta_ordenado(a,0,len(a)-1)
 	print "Tiempo de Dual Pivot Quicksort:",end_time
-def iniciar(n,m,l):
+def Main(n,m,l):
 	for i  in range(l):
-		print "---"
-		hola(n,m)
+		print "-------------------"
+		pruebaAlgoritmos(n,m)
 k = map(int,argv[1:])
 stack_size(67108864)
-tr = Thread(target=iniciar,args=(k[0],k[1],k[2]))
+tr = Thread(target=Main,args=(k[0],k[1],k[2]))
 tr.start()
+P = [[] for i in range(5)]
+for i in range(5):
+	maxi = max(J[i])
+	mini = min(J[i])
+	prom = (sum(J[i][j] for j in range(k[2])) - maxi - mini)/float((k[2]-2))
+	P[i]+= [maxi,mini,prom]
 
