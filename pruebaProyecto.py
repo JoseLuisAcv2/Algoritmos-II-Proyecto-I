@@ -95,21 +95,28 @@ def casiOrdenado2(n):
 				break
 	return A
 
+"""
+	Descripcion: Retorna una copia exacta del arreglo que recibe como parametro
+"""
 def copiarArreglo(A):
 	return [A[i] for i in range(len(A))]
 
 def pruebaAlgoritmos(n,m,T):
 
 	print "Obteniendo Arreglo...\n"
-	arr = obtenerArreglo(m,n)
+	arr = obtenerArreglo(m,n)							#Se obtiene el arreglo principal para la realizacion de las pruebas.
 	
 	print "Comenzando Heapsort..."
-	a = copiarArreglo(arr)
-	start_time = time()
+	a = copiarArreglo(arr)								#Se crea una copia del arreglo principal para cada prueba.
+
+	start_time = time()									#Se toma el tiempo justo antes de empezar el algoritmo de ordenamiento.
 	heapsort(a,0,len(a)-1)
-	end_time = time() - start_time
-	T[0].append(end_time)
-	estaOrdenado(a,0,len(a)-1)
+	end_time = time() - start_time						#Se toma el tiempo justo despues de que finaliza el algoritmo y
+														#se le resta al tiempo justo antes para poder obtener su tiempo de ejecucion.
+
+	T[0].append(end_time)								#Se guarda el tiempo de ejecucion en un arreglo para su posterior analisis.
+
+	estaOrdenado(a,0,len(a)-1)							#Se verifica que el arreglo haya sido ordenado correctamente.
 	print "Tiempo de heapsort:",end_time
 	print
 	print "Comenzando Median Of Three Quicksort..."
