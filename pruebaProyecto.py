@@ -5,8 +5,6 @@ from sys import*
 
 
 #Descripcion: Funcion que verifica si un arreglo A esta ordenado en el intervalo [p,r]
-#Pre-condicion: |A| > 0 ^ p>=0 ^ r<|A| ^ p<r
-#Post-condicion: all(A[i]<=A[i+1] for i in range(p,r))
 
 def estaOrdenado(A,p,r):
 	if all(A[i]<=A[i+1] for i in range(p,r)):
@@ -66,8 +64,8 @@ def mitad(n):
 
 
 #Descripcion: Dado un conjunto ordenado de elementos de tipo entero, se escogen
-#			 al azar 16 pares de elementos que se encuentran separados 8 lugares, entonces se
-#			 intercambian los pares.
+#			  al azar 16 pares de elementos que se encuentran separados 8 lugares, entonces se
+#			  intercambian los pares.
 def casiOrdenado1(n):
 	A = ordenado(n)
 	B = [False]*n
@@ -81,8 +79,8 @@ def casiOrdenado1(n):
 	return A
 
 	#Descripcion: Dado un conjunto ordenado de N elementos de tipo entero, se escogen
-	#			 al azar n/4 pares de elementos que se encuentran separados 4 lugares, entonces se
-    #            intercambian los pares
+	#			  al azar n/4 pares de elementos que se encuentran separados 4 lugares, entonces se
+    #             intercambian los pares
 def casiOrdenado2(n):
 	A = ordenado(n)
 	B = [False]*n
@@ -103,7 +101,8 @@ def copiarArreglo(A):
 
 def pruebaAlgoritmos(n,m,T):
 
-	print "Obteniendo Arreglo...\n"
+	print "Obteniendo Arreglo..."
+	print
 	arr = obtenerArreglo(m,n)							#Se obtiene el arreglo principal para la realizacion de las pruebas.
 	
 	print "Comenzando Heapsort..."
@@ -112,7 +111,7 @@ def pruebaAlgoritmos(n,m,T):
 	start_time = time()									#Se toma el tiempo justo antes de empezar el algoritmo de ordenamiento.
 	heapsort(a,0,len(a)-1)
 	end_time = time() - start_time						#Se toma el tiempo justo despues de que finaliza el algoritmo y
-														#se le resta al tiempo justo antes para poder obtener su tiempo de ejecucion.
+														#Se le resta al tiempo justo antes para poder obtener su tiempo de ejecucion.
 
 	T[0].append(end_time)								#Se guarda el tiempo de ejecucion en un arreglo para su posterior analisis.
 
@@ -156,6 +155,8 @@ def pruebaAlgoritmos(n,m,T):
 	print "Tiempo de Dual Pivot Quicksort:",end_time
 	print
 
+#Descripcion: Procedimiento que muestra el tiempo promedio de ejecucion de cada algoritmo de ordenamiento
+
 def mostrarPromedios(P):
 	
 	print "---------- Promedios ----------"
@@ -164,6 +165,8 @@ def mostrarPromedios(P):
 	print "Introsort:                    ",round(P[2],4)
 	print "3-Way Partitioning Quicksort: ",round(P[3],4)
 	print "Dual Pivot Quicksort:         ",round(P[4],4)
+
+#Descripcion: Procedimiento que revisa la correctitud de los parametros introducidos por el usuario.
 
 def validarParametros(n,m,l):
 	if n<1:
@@ -175,6 +178,9 @@ def validarParametros(n,m,l):
 	if l<3:
 		print "Se deben realizar 3 o mas repeticiones"
 		exit()
+
+#Descripcion: Funcion principal que llama a todos los procedimientos necesarios bajo los parametros
+#			  introducidos por el usuario.
 
 def Main(n,m,l):
 	
@@ -192,7 +198,12 @@ def Main(n,m,l):
 
 	mostrarPromedios(P)
 
-k = map(int,argv[1:])
-stack_size(67108864)
-tr = Thread(target=Main,args=(k[0],k[1],k[2]))
-tr.start()
+k = map(int,argv[1:])								#Se almacenan los parametros de entrada en un arreglo para realizar la conversion
+													# de string a entero.
+
+stack_size(67108864)								# Se crea un stack adicional de 64mm.
+
+tr = Thread(target=Main,args=(k[0],k[1],k[2]))		#Se crea un thread que selecciona a la funcion Main y le pasa como
+													#parametros los elementos del arreglo k.
+
+tr.start()											#Se inicia el thread para empezar la ejecucion del programa.
