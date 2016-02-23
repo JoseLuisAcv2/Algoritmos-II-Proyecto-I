@@ -1,0 +1,24 @@
+#!/bin/bash
+# Script para registar los tiempos de ejecucion de los algoritmos
+# de ordenamiento.
+# Parametro: Cantidad de pruebas
+
+echo "COMENZANDO PRUEBAS"
+
+# Numero de pruebas
+n=$1
+
+# Crear archivo de registro de tiempos
+touch resultados
+echo -e "RESULTADOS DE PRUEBAS\n" | tee -a resultados
+
+# Tipo de arreglo
+for i in {1..7}
+do
+	# Tamano del arreglo
+	for j in "4096" "8192" "16384" "32768" "65536" "131072"
+	do
+		echo -e "\nARREGLO TIPO" $i "TAMANO" $j "\n" | tee -a resultados
+		python pruebaProyecto.py $j $i $n | tee -a resultados
+	done
+done
