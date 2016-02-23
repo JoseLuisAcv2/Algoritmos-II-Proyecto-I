@@ -3,19 +3,20 @@ from threading import*
 from time import*
 from sys import*
 
-""" 
-	Descripcion: Funcion que verifica si un arreglo A esta ordenado en el intervalo [p,r]
-	Pre-condicion: |A| > 0 ^ p>=0 ^ r<|A| ^ p<r
-	Post-condicion: all(A[i]<=A[i+1] for i in range(p,r))
-"""
+
+#Descripcion: Funcion que verifica si un arreglo A esta ordenado en el intervalo [p,r]
+#Pre-condicion: |A| > 0 ^ p>=0 ^ r<|A| ^ p<r
+#Post-condicion: all(A[i]<=A[i+1] for i in range(p,r))
+
 def estaOrdenado(A,p,r):
 	if all(A[i]<=A[i+1] for i in range(p,r)):
 		print("Esta ordenado")
 	else: 
 		print("No esta ordenado")
-"""
-	Descripcion: Dados m y n, la funcion retorna un arreglo de longitud n con ciertas caracteristicas asociadas al valor de m. 
-"""
+
+#Descripcion: Dados m y n, la funcion retorna un arreglo de longitud n 
+#con ciertas caracteristicas asociadas al valor de m. 
+
 
 def obtenerArreglo(m,n):
 	if m == 1:
@@ -33,41 +34,40 @@ def obtenerArreglo(m,n):
 	elif m == 7:
 		return casiOrdenado2(n)
 
-"""
-	Descripcion: Retorna un arreglo de numeros reales entre 0 y 1.
-"""
+
+#Descripcion: Retorna un arreglo de numeros reales entre 0 y 1.
+
 def puntoFlotante(n):
 	return [random() for i in range(n)]
 
-"""
-	Descripcion: Retorna un arreglo ordenado de forma estrictamente ascendente.
-"""
+
+#Descripcion: Retorna un arreglo ordenado de forma estrictamente ascendente.
+
 def ordenado(n):
 	return [i for i in range(n)]
 
-"""
-	Descripcion: Retorna un arreglo ordenado de forma estrictamente descendiente.
-"""
+
+#Descripcion: Retorna un arreglo ordenado de forma estrictamente descendiente.
+
 def inverso(n):
 	return [n-i for i in range(n)]
 
-"""
-	Descripcion: Retorna un arreglo con 0's y 1's elegidos de forma aleatoria.
-"""
+
+#Descripcion: Retorna un arreglo con 0's y 1's elegidos de forma aleatoria.
+
 def ceroUno(n):
 	return [randint(0,1) for i in range(n)]
 
-"""
-	Descripcion: Retorna un arreglo de la forma 1,2,...N/2,N/2,...,2,1.
-"""
+
+#Descripcion: Retorna un arreglo de la forma 1,2,...N/2,N/2,...,2,1.
+
 def mitad(n):
 	return [i+1 for i in range(n//2)] + [n//2 - i for i in range(n//2)]
 
-"""
-	Descripcion: Dado un conjunto ordenado de elementos de tipo entero, se escogen
-				 al azar 16 pares de elementos que se encuentran separados 8 lugares, entonces se
-				 intercambian los pares.
-"""
+
+#Descripcion: Dado un conjunto ordenado de elementos de tipo entero, se escogen
+#			 al azar 16 pares de elementos que se encuentran separados 8 lugares, entonces se
+#			 intercambian los pares.
 def casiOrdenado1(n):
 	A = ordenado(n)
 	B = [False]*n
@@ -80,9 +80,9 @@ def casiOrdenado1(n):
 				break
 	return A
 
-"""
-	Descripcion: Retorna un arreglo en el que N/2 elementos han sido cambiados de lugar
-"""
+	#Descripcion: Dado un conjunto ordenado de N elementos de tipo entero, se escogen
+	#			 al azar n/4 pares de elementos que se encuentran separados 4 lugares, entonces se
+    #            intercambian los pares
 def casiOrdenado2(n):
 	A = ordenado(n)
 	B = [False]*n
@@ -95,9 +95,9 @@ def casiOrdenado2(n):
 				break
 	return A
 
-"""
-	Descripcion: Retorna una copia exacta del arreglo que recibe como parametro
-"""
+
+	#Descripcion: Retorna una copia exacta del arreglo que recibe como parametro
+
 def copiarArreglo(A):
 	return [A[i] for i in range(len(A))]
 
