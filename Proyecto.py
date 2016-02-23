@@ -9,15 +9,6 @@ from math import*
 from random import*
 from sys import*
 
-""" Nombre: estaOrdenado
-	Descripcion: Funcion que verifica si un arreglo A esta ordenado en el intervalo [p,r]
-"""
-def esta_ordenado(a,p,r):
-	if all(a[i]<=a[i+1] for i in range(p,r)):
-		print("Esta ordenado")
-	else: 
-		print("No esta ordenado")
-
 ##########################################################################################################################################
 
 """	Nombre: insertionsort
