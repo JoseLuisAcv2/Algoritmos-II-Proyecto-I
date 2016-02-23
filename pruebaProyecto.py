@@ -173,7 +173,7 @@ def validarParametros(n,m,l):
 		print "El segundo parametro debe ser un numero entre 1 y 7"
 		exit()
 	if l<3:
-		print "Se deben realizar mas de 3 repeticiones"
+		print "Se deben realizar 3 o mas repeticiones"
 		exit()
 
 def Main(n,m,l):
