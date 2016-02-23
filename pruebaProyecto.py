@@ -124,19 +124,26 @@ def pruebaAlgoritmos(n,m,T):
 def mostrarPromedios(P):
 	
 	print "---------- Promedios ----------"
-	print "Heapsort:                     ",P[0]
-	print "Median of Three Quicksort:    ",P[1]
-	print "Introsort:                    ",P[2]
-	print "3-Way Partitioning Quicksort: ",P[3]
-	print "Dual Pivot Quicksort:         ",P[4]
+	print "Heapsort:                     ",round(P[0],4)
+	print "Median of Three Quicksort:    ",round(P[1],4)
+	print "Introsort:                    ",round(P[2],4)
+	print "3-Way Partitioning Quicksort: ",round(P[3],4)
+	print "Dual Pivot Quicksort:         ",round(P[4],4)
+
+def validarParametros(n,m,l):
+	if n<1:
+		print "La longitud del arreglo debe ser mayor a 0"
+		exit()
+	if not(1<=m<8):
+		print "El segundo parametro debe ser un numero entre 1 y 7"
+		exit()
+	if l<=3:
+		print "Se deben realizar mas de 3 repeticiones"
+		exit()
 
 def Main(n,m,l):
 	
-	try:
-		assert(l >= 3)
-	except:
-		print "Numero de pruebas debe ser mayor o igual a 3"
-		exit()
+	validarParametros(n,m,l)
 
 	T = [[] for i in range(5)]
 	P = [ 0 for i in range(5)]
