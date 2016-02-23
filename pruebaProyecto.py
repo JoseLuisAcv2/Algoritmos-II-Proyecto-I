@@ -3,14 +3,19 @@ from threading import*
 from time import*
 from sys import*
 
-""" Nombre: estaOrdenado
+""" 
 	Descripcion: Funcion que verifica si un arreglo A esta ordenado en el intervalo [p,r]
+	Pre-condicion: |A| > 0 ^ p>=0 ^ r<|A| ^ p<r
+	Post-condicion: all(A[i]<=A[i+1] for i in range(p,r))
 """
-def esta_ordenado(a,p,r):
-	if all(a[i]<=a[i+1] for i in range(p,r)):
+def estaOrdenado(A,p,r):
+	if all(A[i]<=A[i+1] for i in range(p,r)):
 		print("Esta ordenado")
 	else: 
 		print("No esta ordenado")
+"""
+	Descripcion: Dados m y n, la funcion retorna un arreglo de longitud n con ciertas caracteristicas asociadas al valor de m. 
+"""
 
 def obtenerArreglo(m,n):
 	if m == 1:
@@ -28,21 +33,41 @@ def obtenerArreglo(m,n):
 	elif m == 7:
 		return casiOrdenado2(n)
 
+"""
+	Descripcion: Retorna un arreglo de numeros reales entre 0 y 1.
+"""
 def puntoFlotante(n):
 	return [random() for i in range(n)]
 
+"""
+	Descripcion: Retorna un arreglo ordenado de forma estrictamente ascendente.
+"""
 def ordenado(n):
 	return [i for i in range(n)]
 
+"""
+	Descripcion: Retorna un arreglo ordenado de forma estrictamente descendiente.
+"""
 def inverso(n):
 	return [n-i for i in range(n)]
 
+"""
+	Descripcion: Retorna un arreglo con 0's y 1's elegidos de forma aleatoria.
+"""
 def ceroUno(n):
 	return [randint(0,1) for i in range(n)]
 
+"""
+	Descripcion: Retorna un arreglo de la forma 1,2,...N/2,N/2,...,2,1.
+"""
 def mitad(n):
 	return [i+1 for i in range(n//2)] + [n//2 - i for i in range(n//2)]
 
+"""
+	Descripcion: Dado un conjunto ordenado de elementos de tipo entero, se escogen
+				 al azar 16 pares de elementos que se encuentran separados 8 lugares, entonces se
+				 intercambian los pares.
+"""
 def casiOrdenado1(n):
 	A = ordenado(n)
 	B = [False]*n
@@ -55,6 +80,9 @@ def casiOrdenado1(n):
 				break
 	return A
 
+"""
+	Descripcion: Retorna un arreglo en el que N/2 elementos han sido cambiados de lugar
+"""
 def casiOrdenado2(n):
 	A = ordenado(n)
 	B = [False]*n
@@ -67,21 +95,28 @@ def casiOrdenado2(n):
 				break
 	return A
 
+"""
+	Descripcion: Retorna una copia exacta del arreglo que recibe como parametro
+"""
 def copiarArreglo(A):
 	return [A[i] for i in range(len(A))]
 
 def pruebaAlgoritmos(n,m,T):
 
 	print "Obteniendo Arreglo...\n"
-	arr = obtenerArreglo(m,n)
+	arr = obtenerArreglo(m,n)							#Se obtiene el arreglo principal para la realizacion de las pruebas.
 	
 	print "Comenzando Heapsort..."
-	a = copiarArreglo(arr)
-	start_time = time()
+	a = copiarArreglo(arr)								#Se crea una copia del arreglo principal para cada prueba.
+
+	start_time = time()									#Se toma el tiempo justo antes de empezar el algoritmo de ordenamiento.
 	heapsort(a,0,len(a)-1)
-	end_time = time() - start_time
-	T[0].append(end_time)
-	esta_ordenado(a,0,len(a)-1)
+	end_time = time() - start_time						#Se toma el tiempo justo despues de que finaliza el algoritmo y
+														#se le resta al tiempo justo antes para poder obtener su tiempo de ejecucion.
+
+	T[0].append(end_time)								#Se guarda el tiempo de ejecucion en un arreglo para su posterior analisis.
+
+	estaOrdenado(a,0,len(a)-1)							#Se verifica que el arreglo haya sido ordenado correctamente.
 	print "Tiempo de heapsort:",end_time
 	print
 	print "Comenzando Median Of Three Quicksort..."
@@ -90,7 +125,7 @@ def pruebaAlgoritmos(n,m,T):
 	median_of_threeQuicksort(a,0,len(a)-1)
 	end_time = time() - start_time
 	T[1].append(end_time)
-	esta_ordenado(a,0,len(a)-1)
+	estaOrdenado(a,0,len(a)-1)
 	print "Tiempo de Median Of Three Quicksort:",end_time 
 	print
 	print "Comenzando Introsort..."
@@ -99,7 +134,7 @@ def pruebaAlgoritmos(n,m,T):
 	introsort(a,0,len(a)-1)
 	end_time = time() - start_time
 	T[2].append(end_time)
-	esta_ordenado(a,0,len(a)-1)
+	estaOrdenado(a,0,len(a)-1)
 	print "Tiempo de Introsort:",end_time
 	print
 	print "Comenzando 3-way Partitioning Quicksort..."
@@ -108,7 +143,7 @@ def pruebaAlgoritmos(n,m,T):
 	quicksort_3_way_partitioning(a,0,len(a)-1)
 	end_time = time() - start_time
 	T[3].append(end_time)
-	esta_ordenado(a,0,len(a)-1)
+	estaOrdenado(a,0,len(a)-1)
 	print "Tiempo de 3-way Partitioning Quicksort:",end_time
 	print
 	print "Comenzando Dual Pivot Quicksort..."
@@ -117,7 +152,7 @@ def pruebaAlgoritmos(n,m,T):
 	quicksort_2p(a,0,len(a)-1)
 	end_time = time() - start_time
 	T[4].append(end_time)
-	esta_ordenado(a,0,len(a)-1)
+	estaOrdenado(a,0,len(a)-1)
 	print "Tiempo de Dual Pivot Quicksort:",end_time
 	print
 
