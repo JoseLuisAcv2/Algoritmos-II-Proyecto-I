@@ -10,8 +10,10 @@ from sys import*
 
 ##########################################################################################################################################
 
-"""	Nombre: insertionsort
+"""	
 	Descripcion: Algoritmo de ordenamiento O(N^2)
+	Precondicion: |A| > 0 ^ 0<=p<r<|A|
+	Postcondicion: all(A[i]<=A[i+1] for i in range(p,r))
 """
 def insertionsort(A,p,r):
 	for i in range(p+1,r+1):
@@ -45,7 +47,11 @@ def maxHeapify(A, i, heapSize, p):
 def buildMaxHeap(A, heapSize, p, r):
 	for i in range(r - heapSize//2, p-1, -1):
 		maxHeapify(A, i, heapSize, p)
-
+"""
+	Descripcion: Algoritmo de ordenamiento de complejidad O(NlogN) para el mejor y el peor caso
+	Precondicion: |A| > 0 ^ 0<=p<r<|A|
+	Postcondicion: all(A[i]<=A[i+1] for i in range(p,r))
+"""
 def heapsort(A,p,r):
 
 	heapSize = r - p + 1
@@ -58,7 +64,10 @@ def heapsort(A,p,r):
 
 ##########################################################################################################################################
 
-#Hoare Partition
+"""
+	Nombre: Hoare Partition
+	Precondicion: |A| > 0 ^ 0<=p<r<|A|
+"""
 def Partition(A,p,r,x):
 	i = p-1
 	j = r+1
@@ -89,7 +98,11 @@ def median_of_three(a,b,c):
 
 ##########################################################################################################################################
 
-#Median-of-Three Quicksort
+"""
+	Descripcion: Algoritmo de ordenamiento de complejidad O(NlogN) para caso promedio y O(N^2) para el peor caso.
+	Precondicion: |A| > 0 ^ 0<=p<r<|A|
+	Postcondicion: all(A[i]<=A[i+1] for i in range(p,r))
+"""
 def median_of_threeQuicksort(A,p,r):
 	quicksort_loop(A,p,r)
 	insertionsort(A,p,r)
