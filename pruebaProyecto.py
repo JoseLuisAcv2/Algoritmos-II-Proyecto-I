@@ -1,54 +1,47 @@
 from Proyecto import*
 from threading import*
 from time import*
-
-J = [[] for i in range(5)]
+from sys import*
 
 """ Nombre: estaOrdenado
 	Descripcion: Funcion que verifica si un arreglo A esta ordenado en el intervalo [p,r]
 """
-
 def esta_ordenado(a,p,r):
 	if all(a[i]<=a[i+1] for i in range(p,r)):
 		print("Esta ordenado")
 	else: 
 		print("No esta ordenado")
+
 def obtenerArreglo(m,n):
 	if m == 1:
-		a = puntoFlotante(n)
+		return puntoFlotante(n)
 	elif m == 2:
-		a = ordenado(n)
+		return ordenado(n)
 	elif m == 3:
-		a = inverso(n)
+		return inverso(n)
 	elif m == 4:
-		a = ceroUno(n)
+		return ceroUno(n)
 	elif m == 5:
-		a = mitad(n)
+		return mitad(n)
 	elif m == 6:
-		a = casiOrdenado1(n)
+		return casiOrdenado1(n)
 	elif m == 7:
-		a = casiOrdenado2(n)
-	return a
+		return casiOrdenado2(n)
 
 def puntoFlotante(n):
-	A = [random() for i in range(n)]
-	return A
+	return [random() for i in range(n)]
 
 def ordenado(n):
-	A = [i for i in range(n)]
-	return A
+	return [i for i in range(n)]
 
 def inverso(n):
-	A = [n-i for i in range(n)]
-	return A
+	return [n-i for i in range(n)]
 
 def ceroUno(n):
-	A = [randint(0,1) for i in range(n)]
-	return A
+	return [randint(0,1) for i in range(n)]
 
 def mitad(n):
-	A = [i+1 for i in range(n//2)] + [n//2 - i for i in range(n//2)]
-	return A
+	return [i+1 for i in range(n//2)] + [n//2 - i for i in range(n//2)]
 
 def casiOrdenado1(n):
 	A = ordenado(n)
@@ -74,69 +67,90 @@ def casiOrdenado2(n):
 				break
 	return A
 
-def pruebaAlgoritmos(n,m):
-	print "Obteniendo Arreglo..."
+def copiarArreglo(A):
+	return [A[i] for i in range(len(A))]
+
+def pruebaAlgoritmos(n,m,T):
+
+	print "Obteniendo Arreglo...\n"
 	arr = obtenerArreglo(m,n)
-	#esta_ordenado(arr,0,len(a)-1)
+	
 	print "Comenzando Heapsort..."
-	a = arr
+	a = copiarArreglo(arr)
 	start_time = time()
 	heapsort(a,0,len(a)-1)
 	end_time = time() - start_time
-	J[0].append(end_time)
+	T[0].append(end_time)
 	esta_ordenado(a,0,len(a)-1)
 	print "Tiempo de heapsort:",end_time
 	print
 	print "Comenzando Median Of Three Quicksort..."
-	esta_ordenado(arr,0,len(a)-1)
-	a = arr
+	a = copiarArreglo(arr)
 	start_time = time()
 	median_of_threeQuicksort(a,0,len(a)-1)
 	end_time = time() - start_time
-	J[1].append(end_time)
+	T[1].append(end_time)
 	esta_ordenado(a,0,len(a)-1)
 	print "Tiempo de Median Of Three Quicksort:",end_time 
 	print
-	print "Comenzando Instrosort..."
-	a = arr
+	print "Comenzando Introsort..."
+	a = copiarArreglo(arr)
 	start_time = time()
 	introsort(a,0,len(a)-1)
 	end_time = time() - start_time
-	J[2].append(end_time)
+	T[2].append(end_time)
 	esta_ordenado(a,0,len(a)-1)
 	print "Tiempo de Introsort:",end_time
 	print
 	print "Comenzando 3-way Partitioning Quicksort..."
-	a = arr
+	a = copiarArreglo(arr)
 	start_time = time()
 	quicksort_3_way_partitioning(a,0,len(a)-1)
 	end_time = time() - start_time
-	J[3].append(end_time)
+	T[3].append(end_time)
 	esta_ordenado(a,0,len(a)-1)
 	print "Tiempo de 3-way Partitioning Quicksort:",end_time
 	print
 	print "Comenzando Dual Pivot Quicksort..."
-	a = arr
+	a = copiarArreglo(arr)
 	start_time = time()
 	quicksort_2p(a,0,len(a)-1)
 	end_time = time() - start_time
-	J[4].append(end_time)
+	T[4].append(end_time)
 	esta_ordenado(a,0,len(a)-1)
 	print "Tiempo de Dual Pivot Quicksort:",end_time
+	print
+
+def mostrarPromedios(P):
+	
+	print "---------- Promedios ----------"
+	print "Heapsort:                     ",P[0]
+	print "Median of Three Quicksort:    ",P[1]
+	print "Introsort:                    ",P[2]
+	print "3-Way Partitioning Quicksort: ",P[3]
+	print "Dual Pivot Quicksort:         ",P[4]
 
 def Main(n,m,l):
-	for i  in range(l):
-		print "-------------------"
-		pruebaAlgoritmos(n,m)
+	
+	try:
+		assert(l >= 3)
+	except:
+		print "Numero de pruebas debe ser mayor o igual a 3"
+		exit()
+
+	T = [[] for i in range(5)]
+	P = [ 0 for i in range(5)]
+	
+	for i in range(l):
+		print "---------- Prueba",i+1,"----------\n"
+		pruebaAlgoritmos(n,m,T)
+
+	for i in range(5):
+		P[i] = (sum(T[i][j] for j in range(l)) - max(T[i]) - min(T[i]))/float(l-2)
+
+	mostrarPromedios(P)
 
 k = map(int,argv[1:])
 stack_size(67108864)
 tr = Thread(target=Main,args=(k[0],k[1],k[2]))
 tr.start()
-P = [[] for i in range(5)]
-for i in range(5):
-	maxi = max(J[i])
-	mini = min(J[i])
-	prom = (sum(J[i][j] for j in range(k[2])) - maxi - mini)/float((k[2]-2))
-	P[i]+= [maxi,mini,prom]
-
