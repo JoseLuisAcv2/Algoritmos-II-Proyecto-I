@@ -1,7 +1,6 @@
 """ Proyecto I Algoritmos II
 	Integrantes: Jose Luis Acevedo #13-10006
 				 Pablo Betancourt  #13-10147
-
 									Libreria de Algoritmos de ordenamiento
 """
 
@@ -103,6 +102,7 @@ def quicksort_loop(A,p,r):
 		else:
 			quicksort_loop(A,p,m)
 			p = m+1
+
 ############################################################################################################################################
 
 #Introsort
@@ -119,6 +119,7 @@ def introsort_loop(A,p,r,limit):
 			m = Partition(A,p,r,median_of_three(A[p],A[r],A[(p+r)//2]))
 			introsort_loop(A,m,r,limit)
 			r = m
+
 ############################################################################################################################################
 
 #3-way-Partitionig Quicksort
@@ -158,7 +159,6 @@ def quicksort_3_way_partitioning(A,l,r):
 			quicksort_3_way_partitioning(A,l,j)
 			quicksort_3_way_partitioning(A,i,r)
 ############################################################################################################################################
-
 
 #Quicksort 2 pivotes
 def quicksort_2p(A,left,right):
