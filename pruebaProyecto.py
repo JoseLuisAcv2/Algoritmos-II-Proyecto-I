@@ -78,9 +78,9 @@ def casiOrdenado1(n):
 				break
 	return A
 
-	#Descripcion: Dado un conjunto ordenado de N elementos de tipo entero, se escogen
-	#			  al azar n/4 pares de elementos que se encuentran separados 4 lugares, entonces se
-    #             intercambian los pares
+#Descripcion: Dado un conjunto ordenado de N elementos de tipo entero, se escogen
+#			  al azar n/4 pares de elementos que se encuentran separados 4 lugares, entonces se
+#             intercambian los pares
 def casiOrdenado2(n):
 	A = ordenado(n)
 	B = [False]*n
@@ -94,7 +94,7 @@ def casiOrdenado2(n):
 	return A
 
 
-	#Descripcion: Retorna una copia exacta del arreglo que recibe como parametro
+#Descripcion: Retorna una copia exacta del arreglo que recibe como parametro
 
 def copiarArreglo(A):
 	return [A[i] for i in range(len(A))]
